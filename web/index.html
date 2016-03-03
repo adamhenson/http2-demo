@@ -4,7 +4,11 @@
   </head>
   <body>
     <p>Hello HTTP/2</p>
-    <img src="/images/nyc.jpg" />
-  </script>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+  <script>
+    setTimeout(function(){
+      $('body').append('<img src="/images/nyc.jpg"/>');
+    }, 3000);
+  </script>
 </html>

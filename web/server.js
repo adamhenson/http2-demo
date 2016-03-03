@@ -7,6 +7,7 @@ function onRequest(request, response) {
   var filename = path.join(__dirname, request.url);
   
   if ((filename.indexOf(__dirname) === 0) && fs.existsSync(filename) && fs.statSync(filename).isFile()) {
+    // push and image to the response
     if (response.push) {
       var push = response.push('/images/nyc.jpg');
       push.writeHead(200, {'content-type': 'image/jpeg'});

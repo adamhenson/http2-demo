@@ -2,28 +2,16 @@ var fs = require('fs');
 var path = require('path');
 var http2 = require('http2');
 
-// We cache one file to be able to do simple performance tests without waiting for the disk
-var cachedFile = fs.readFileSync(path.join(__dirname, './server.js'));
-var cachedUrl = '/server.js';
-
 // The callback to handle requests
 function onRequest(request, response) {
   var filename = path.join(__dirname, request.url);
-
-  // Serving server.js from cache. Useful for microbenchmarks.
-  if (request.url === cachedUrl) {
+  
+  if ((filename.indexOf(__dirname) === 0) && fs.existsSync(filename) && fs.statSync(filename).isFile()) {
     if (response.push) {
-      // Also push down the client js, since it's possible if the requester wants
-      // one, they want both.
-      var push = response.push('/client.js');
-      push.writeHead(200);
-      fs.createReadStream(path.join(__dirname, '/client.js')).pipe(push);
+      var push = response.push('/images/nyc.jpg');
+      push.writeHead(200, {'content-type': 'image/jpeg'});
+      fs.createReadStream(path.join(__dirname, '/images/nyc.jpg')).pipe(push);
     }
-    response.end(cachedFile);
-  }
-
-  // Reading file from disk if it exists and is safe.
-  else if ((filename.indexOf(__dirname) === 0) && fs.existsSync(filename) && fs.statSync(filename).isFile()) {
     response.writeHead(200);
     var fileStream = fs.createReadStream(filename);
     fileStream.pipe(response);

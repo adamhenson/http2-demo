@@ -15,3 +15,6 @@ Or without logging:
 ```
 $ node server.js
 ```
+
+## See It
+Assuming your environment port is 8080, you can navigate to https://localhost:800 to view this HTTP/2 website.

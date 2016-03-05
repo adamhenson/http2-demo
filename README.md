@@ -7,7 +7,7 @@
 3. `$ cd` into this project directory and then `$ npm install`, to install the dependencies.
 
 ## Start the Server
-Start the serving with informational logging:
+Start the server with informational logging:
 ```
 $ HTTP2_LOG=info node server.js
 ```

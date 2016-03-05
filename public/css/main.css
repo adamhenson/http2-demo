@@ -1,0 +1,10 @@
+html {
+  padding: 0.5em;
+  font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+  font-weight: 200;
+  text-align: center;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}

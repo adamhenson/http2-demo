@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Hello HTTP/2</title>
+    <link href="/public/css/main.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h2>Hello HTTP/2</h2>
+    <div>
+      <p>Waiting 1 second, then loading image...</p>
+    </div>
+  </body>
+  <script src="/public/js/jquery.min.js"></script>
+  <script>
+    setTimeout(function(){
+      $('div').html('<img src="/public/images/nyc.jpg"/>');
+    }, 1000);
+  </script>
+</html>

@@ -6,20 +6,32 @@ var http = require('./lib/http');
 var http2 = require('http2');
 var path = require('path');
 
-var files = {
-  'view' : '/index.html',
-  'image' : '/images/nyc.jpg'
-};
+// File queue
+const FILES = [
+  '/public/html/index.html',
+  '/public/css/main.css',
+  '/public/js/jquery.min.js',
+  '/public/images/nyc.jpg'
+];
+
+// Create read stream and add to response
+function createReadStreamResponse(file, response) {
+
+  let push = response.push(file);
+  push.writeHead(200);
+  fs.createReadStream(path.join(__dirname, file)).pipe(push);
+
+}
 
 // Request callback
 function onRequest(request, response) {
 
-  let view = path.join(__dirname, files.view);
+  let view = path.join(__dirname, FILES[0]);
 
   if (response.push) {
-    let push = response.push(files.image);
-    push.writeHead(200);
-    fs.createReadStream(path.join(__dirname, files.image)).pipe(push);
+    FILES.forEach((file) => {
+      createReadStreamResponse(file, response)
+    });
   }
 
   response.writeHead(200);

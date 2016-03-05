@@ -4,7 +4,10 @@
   "license": "MIT",
   "main": "server.js",
   "version": "0.0.1",
-  "author": "Adam Henson <adam@hensonism.com>",
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "author": "Adam Henson <adam@hensonism.com> (http://www.hensonism.com)",
   "contributors": [
     {
       "name": "Adam Henson",
@@ -18,17 +21,14 @@
   "scripts": {
     "start": "server.js"
   },
+  "keywords": [
+    "http2",
+    "http/2"
+  ],
   "dependencies": {
     "http2": "^3.3.2"
   },
   "devDependencies": {
-    "istanbul": "*",
-    "chai": "*",
-    "mocha": "*",
-    "docco": "*",
     "bunyan": "*"
-  },
-  "engines": {
-    "node": "0.10.x"
   }
 }

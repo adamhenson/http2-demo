@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Hello HTTP/2</title>
+    <style>
+      html {
+        padding: 0.5em;
+        font-family: -apple-system, "Helvetica Neue", "Lucida Grande";
+        font-weight: 200;
+        text-align: center;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Hello HTTP/2</h2>
+    <div>
+      <p>Waiting 1 second, then loading image...</p>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+  <script>
+    setTimeout(function(){
+      $('div').html('<img src="/images/nyc.jpg"/>');
+    }, 1000);
+  </script>
+</html>

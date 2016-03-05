@@ -1,5 +1,5 @@
 # HTTP/2 Demo
-> A simple HTTP/2 demo using the [http2 package](https://github.com/molnarg/node-http2).
+> A simple Node.js HTTP/2 demo using the [http2 package](https://github.com/molnarg/node-http2).
 
 ## Prepare
 1. If you don't have Node.js and NPM [install them](https://docs.npmjs.com/getting-started/installing-node).

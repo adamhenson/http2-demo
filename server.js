@@ -1,22 +1,29 @@
+'use strict';
+
 var appInfo = require('./package');
 var fs = require('fs');
 var http = require('./lib/http');
 var http2 = require('http2');
 var path = require('path');
 
+var files = {
+  'view' : '/index.html',
+  'image' : '/images/nyc.jpg'
+};
+
 // Request callback
 function onRequest(request, response) {
 
-  var view = path.join(__dirname, '/index.html');
+  let view = path.join(__dirname, files.view);
 
   if (response.push) {
-    var push = response.push('/images/nyc.jpg');
+    let push = response.push(files.image);
     push.writeHead(200);
-    fs.createReadStream(path.join(__dirname, '/images/nyc.jpg')).pipe(push);
+    fs.createReadStream(path.join(__dirname, files.image)).pipe(push);
   }
 
   response.writeHead(200);
-  var fileStream = fs.createReadStream(view);
+  let fileStream = fs.createReadStream(view);
   fileStream.pipe(response);
   fileStream.on('finish',response.end);
 

@@ -2,7 +2,7 @@
 > A simple Node.js HTTP/2 demo using the [http2 package](https://github.com/molnarg/node-http2).
 
 ## Prepare
-1. If you don't have Node.js and NPM [install them](https://docs.npmjs.com/getting-started/installing-node).
+1. If you don't have Node.js and NPM - [install them](https://docs.npmjs.com/getting-started/installing-node).
 2. For pretty printing logs, you will need a global install of bunyan (`$ npm install -g bunyan`).
 3. `$ cd` into this project directory and then `$ npm install`, to install the dependencies.
 

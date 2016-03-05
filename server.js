@@ -16,21 +16,18 @@ const FILES = [
 
 // Create read stream and add to response
 function createReadStreamResponse(file, response) {
-
   let push = response.push(file);
   push.writeHead(200);
   fs.createReadStream(path.join(__dirname, file)).pipe(push);
-
 }
 
 // Request callback
 function onRequest(request, response) {
-
   let view = path.join(__dirname, FILES[0]);
 
   if (response.push) {
     FILES.forEach((file) => {
-      createReadStreamResponse(file, response)
+      createReadStreamResponse(file, response);
     });
   }
 
@@ -38,7 +35,6 @@ function onRequest(request, response) {
   let fileStream = fs.createReadStream(view);
   fileStream.pipe(response);
   fileStream.on('finish', response.end);
-
 }
 
 // Logger

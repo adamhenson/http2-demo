@@ -1,4 +1,4 @@
-# http2-testing
+# HTTP/2 Demo
 > A simple HTTP/2 demo using the [http2 package](https://github.com/molnarg/node-http2).
 
 ## Prepare

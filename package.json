@@ -1,5 +1,5 @@
 {
-  "name": "http2-testing",
+  "name": "http2-demo",
   "description": "An HTTP/2 Playground",
   "license": "MIT",
   "main": "server.js",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamhenson/http2-testing.git"
+    "url": "https://github.com/adamhenson/http2-demo.git"
   },
   "scripts": {
     "start": "server.js"

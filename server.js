@@ -25,7 +25,7 @@ function onRequest(request, response) {
   response.writeHead(200);
   let fileStream = fs.createReadStream(view);
   fileStream.pipe(response);
-  fileStream.on('finish',response.end);
+  fileStream.on('finish', response.end);
 
 }
 

@@ -2,15 +2,13 @@
 
 var appInfo = require('./package');
 var fs = require('fs');
-var http = require('./lib/http');
 var http2 = require('http2');
 var path = require('path');
+var Template = require('./templates/MainTemplate');
 
 // File queue
 const FILES = [
-  '/public/html/index.html',
   '/public/css/main.css',
-  '/public/js/jquery.min.js',
   '/public/images/nyc.jpg'
 ];
 
@@ -23,18 +21,17 @@ function createReadStreamResponse(file, response) {
 
 // Request callback
 function onRequest(request, response) {
-  let view = path.join(__dirname, FILES[0]);
-
   if (response.push) {
-    FILES.forEach((file) => {
+    FILES.forEach((file, index) => {
       createReadStreamResponse(file, response);
+      if(index === FILES.length - 1) {
+        response.end(Template.output({
+          'css' : FILES[0],
+          'image' : FILES[1]
+        }));
+      }
     });
   }
-
-  response.writeHead(200);
-  let fileStream = fs.createReadStream(view);
-  fileStream.pipe(response);
-  fileStream.on('finish', response.end);
 }
 
 // Logger

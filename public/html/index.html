@@ -5,14 +5,13 @@
   </head>
   <body>
     <h2>Hello HTTP/2</h2>
-    <div>
+    <div id="image">
       <p>Waiting 1 second, then loading image...</p>
     </div>
   </body>
-  <script src="/public/js/jquery.min.js"></script>
   <script>
     setTimeout(function(){
-      $('div').html('<img src="/public/images/nyc.jpg"/>');
+      document.getElementById('image').innerHTML = '<img src="/public/images/nyc.jpg"/>';
     }, 1000);
   </script>
 </html>

@@ -1,7 +1,7 @@
-NOTE: Work on this branch is frozen until [http2 issue #107](https://github.com/molnarg/node-http2/issues/107) is resolved.
----
 # HTTP/2 Demo
 > A simple Node.js HTTP/2 demo using the [http2 package](https://github.com/molnarg/node-http2).
+
+<p style="color:red">NOTE: Work on this branch is frozen until [http2 issue #107](https://github.com/molnarg/node-http2/issues/107) is resolved.</p>
 
 ## Prepare
 1. If you don't have Node.js and NPM - [install them](https://docs.npmjs.com/getting-started/installing-node).

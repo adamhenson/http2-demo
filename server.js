@@ -24,12 +24,7 @@ function onRequest(request, response) {
   if (response.push) {
     FILES.forEach((file, index) => {
       createReadStreamResponse(file, response);
-      if(index === FILES.length - 1) {
-        response.end(Template.output({
-          'css' : FILES[0],
-          'image' : FILES[1]
-        }));
-      }
+      if(index === FILES.length - 1) response.end(Template.output(FILES));
     });
   }
 }

@@ -2,12 +2,14 @@
 
 class MainTemplate {
 
-  static output(options){
+  static output(files){
+    let cssPath = files[0];
+    let imagePath = files[1];
     let markup = `
 <html>
   <head>
     <title>Hello HTTP/2</title>
-    <link href="${options.css}" rel="stylesheet" type="text/css">
+    <link href="${cssPath}" rel="stylesheet" type="text/css">
   </head>
   <body>
     <h2>Hello HTTP/2</h2>
@@ -17,7 +19,7 @@ class MainTemplate {
   </body>
   <script>
     setTimeout(function(){
-      document.getElementById('image').innerHTML = '<img src="${options.image}"/>';
+      document.getElementById('image').innerHTML = '<img src="${imagePath}"/>';
     }, 1000);
   </script>
 </html>

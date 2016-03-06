@@ -6,10 +6,10 @@ var http2 = require('http2');
 var path = require('path');
 var Template = require('./templates/MainTemplate');
 
-// File queue
+// File push queue
 const FILES = [
-  '/public/css/main.css',
-  '/public/images/nyc.jpg'
+  'path' : '/public/css/main.css',
+  'path' : '/public/images/nyc.jpg'
 ];
 
 // Create read stream and add to response
@@ -21,7 +21,7 @@ function createReadStreamResponse(file, response) {
 
 // Request callback
 function onRequest(request, response) {
-  if (response.push) {
+  if(response.push) {
     FILES.forEach((file, index) => {
       createReadStreamResponse(file, response);
       if(index === FILES.length - 1) response.end(Template.output(FILES));

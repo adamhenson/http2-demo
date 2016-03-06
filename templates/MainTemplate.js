@@ -3,8 +3,8 @@
 class MainTemplate {
 
   static output(files){
-    let cssPath = files[0];
-    let imagePath = files[1];
+    let cssPath = files[0].path;
+    let imagePath = files[1].path;
     let markup = `
 <html>
   <head>

@@ -1,15 +1,8 @@
-'use strict';
-
-class MainTemplate {
-
-  static output(files){
-    let cssPath = files[0].path;
-    let imagePath = files[1].path;
-    let markup = `
+const HTML = `
 <html>
   <head>
     <title>Hello HTTP/2</title>
-    <link href="${cssPath}" rel="stylesheet" type="text/css">
+    <link href="/public/css/main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <h2>Hello HTTP/2</h2>
@@ -19,15 +12,12 @@ class MainTemplate {
   </body>
   <script>
     setTimeout(function(){
-      document.getElementById('image').innerHTML = '<img src="${imagePath}"/>';
+      document.getElementById('image').innerHTML = '<img src="/public/images/nyc.jpg"/>';
     }, 1000);
   </script>
 </html>
-    `;
-    // return markup without blank lines
-    return markup.replace(/^\s*\n/gm, ''); 
-  }
-  
-}
+`;
 
-module.exports = MainTemplate;
+module.exports = {
+  HTML
+};

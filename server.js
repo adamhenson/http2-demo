@@ -4,7 +4,6 @@ var appInfo = require('./package');
 var fs = require('fs');
 var http2 = require('http2');
 var path = require('path');
-var Template = require('./templates/MainTemplate');
 
 // File push queue
 const FILES = [
@@ -24,12 +23,13 @@ const FILES = [
 
 // Request callback
 function onRequest(request, response) {
+  let HTML = require('./templates/MainTemplate').HTML;
   if(response.push) {
     FILES.forEach((file, index) => {
       let push = response.push(file.path);
       push.writeHead(200, file.headers);
       fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
-      if(index === FILES.length - 1) response.end(Template.output(FILES));
+      if(index === FILES.length - 1) response.end(HTML);
     });
   }
 }

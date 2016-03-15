@@ -29,14 +29,14 @@ const FILES = [
 
 // Request callback
 function onRequest(request, response) {
-  let HTML = require('./templates/MainTemplate').HTML;
+  let html = require('./templates/MainTemplate').HTML;
   if(response.push) {
     FILES.forEach((file, index) => {
       let push = response.push(file.path);
       push.writeHead(200, file.headers);
       fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
       if(index === FILES.length - 1) {
-        response.end(HTML);
+        response.end(html);
       }
     });
   }

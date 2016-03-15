@@ -29,7 +29,6 @@ const FILES = [
 
 // Request callback
 function onRequest(request, response) {
-  console.log('hello world.');
   let HTML = require('./templates/MainTemplate').HTML;
   if(response.push) {
     FILES.forEach((file, index) => {

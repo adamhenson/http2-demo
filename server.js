@@ -29,7 +29,9 @@ function onRequest(request, response) {
       let push = response.push(file.path);
       push.writeHead(200, file.headers);
       fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
-      if(index === FILES.length - 1) response.end(HTML);
+      if(index === FILES.length - 1) {
+        response.end(HTML);
+      }
     });
   }
 }

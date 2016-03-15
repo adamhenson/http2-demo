@@ -18,11 +18,18 @@ const FILES = [
       'content-type' : 'image/jpeg'
     },
     'path' : '/public/images/nyc.jpg'
+  },
+  {
+    'headers' : {
+      'content-type' : 'image/x-icon'
+    },
+    'path' : '/public/images/favicon.ico'
   }
 ];
 
 // Request callback
 function onRequest(request, response) {
+  console.log('hello world.');
   let HTML = require('./templates/MainTemplate').HTML;
   if(response.push) {
     FILES.forEach((file, index) => {

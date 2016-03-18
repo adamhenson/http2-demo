@@ -10,12 +10,8 @@ const HTML = `
     <div id="image">
       <p>Waiting 1 second, then loading image...</p>
     </div>
+    <script src="/public/js/main.js"></script>
   </body>
-  <script>
-    setTimeout(function(){
-      document.getElementById('image').innerHTML = '<img src="/public/images/nyc.jpg"/>';
-    }, 1000);
-  </script>
 </html>
 `;
 

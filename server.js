@@ -15,6 +15,12 @@ const FILES = [
   },
   {
     'headers' : {
+      'content-type' : 'application/javascript'
+    },
+    'path' : '/public/js/main.js'
+  },
+  {
+    'headers' : {
       'content-type' : 'image/jpeg'
     },
     'path' : '/public/images/nyc.jpg'

@@ -2,11 +2,11 @@
 
 const APP_INFO = require('./package');
 const fs = require('fs');
+const getHTML = require('./templates/MainTemplate');
 const http2 = require('http2');
+const log = require('./lib/util').createLogger('server');
 const path = require('path');
 const url = require('url');
-const getHTML = require('./templates/MainTemplate');
-const log = require('./lib/util').createLogger('server');
 
 // File push queue
 const FILES = [

@@ -1,9 +1,9 @@
 'use strict';
 
-var appInfo = require('./package');
-var fs = require('fs');
-var http2 = require('http2');
-var path = require('path');
+const APP_INFO = require('./package');
+const fs = require('fs');
+const http2 = require('http2');
+const path = require('path');
 
 // File push queue
 const FILES = [
@@ -36,6 +36,7 @@ const FILES = [
 // Request callback
 function onRequest(request, response) {
   let html = require('./templates/MainTemplate').HTML;
+  
   if(response.push) {
     FILES.forEach((file, index) => {
       let push = response.push(file.path);
@@ -49,17 +50,17 @@ function onRequest(request, response) {
 }
 
 // Logger
-var log = require('./lib/util').createLogger('server');
+let log = require('./lib/util').createLogger('server');
 
 // Server
-var server = http2.createServer({
+let server = http2.createServer({
   log: log,
   key: fs.readFileSync(path.join(__dirname, '/localhost.key')),
   cert: fs.readFileSync(path.join(__dirname, '/localhost.crt'))
 }, onRequest);
 
-var port = process.env.PORT || 8080;
+let port = process.env.PORT || 8080;
 
 server.listen((port), () => {
-  console.log('%s listening at port %s', appInfo.name, port);
+  console.log('%s listening at port %s', APP_INFO.name, port);
 });

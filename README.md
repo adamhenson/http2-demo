@@ -17,4 +17,4 @@ $ node server.js
 ```
 
 ## See It
-Assuming your environment port is 8080, you can navigate to https://localhost:800 to view this HTTP/2 website.
+Assuming your environment port is 8080, you can navigate to [https://localhost:8080](https://localhost:8080) to view this HTTP/2 website.

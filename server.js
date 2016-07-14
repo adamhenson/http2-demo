@@ -28,7 +28,7 @@ function app(req, res) {
 
 let pusher = new Pusher();
 
-router.get('/', pusher.push, function (req, res) {
+router.get('/', pusher.push, (req, res) => {
   let html = getHTML({
     'title' : 'Hello HTTP/2'
   });

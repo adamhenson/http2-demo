@@ -26,9 +26,9 @@
     "http/2"
   ],
   "dependencies": {
-    "http2": "^3.3.2"
+    "http2": "^3.3.4"
   },
   "devDependencies": {
-    "bunyan": "*"
+    "bunyan": "^1.8.1"
   }
 }

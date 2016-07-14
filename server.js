@@ -8,6 +8,22 @@ const log = require('./lib/util').createLogger('server');
 const path = require('path');
 const url = require('url');
 
+// Cannot use Express until it supports http2 server push,
+// therefore simply using the routing Express uses until
+// it's supported.
+//
+// https://github.com/expressjs/express/issues/2761#issuecomment-142612001
+// 
+// Wondering if there's any light in this comment:
+// https://github.com/expressjs/express/issues/2761#issuecomment-221675351
+const finalhandler = require('finalhandler');
+const Router = require('router');
+const router = new Router();
+
+function app(req, res) {
+  router(req, res, finalhandler(req, res));
+}
+
 // File push queue
 const FILES = [
   {
@@ -92,11 +108,10 @@ function createStaticFileServer(request, response) {
   }
 }
 
-// Request callback for http/2
-function onRequest(request, response) {
-  if(response.push) {
+router.get('/', function (req, res) {
+  if(res.push) {
     FILES.forEach((file, index) => {
-      let push = response.push(file.path);
+      let push = res.push(file.path);
       push.writeHead(200, file.headers);
 
       fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
@@ -105,20 +120,20 @@ function onRequest(request, response) {
         let html = getHTML({
           'title' : 'Hello HTTP/2'
         });
-        response.end(html);
+        res.end(html);
       }
     });
   } else {
-    createStaticFileServer(request, response);
+    createStaticFileServer(req, res);
   }
-}
+})
 
 // Server
 let server = http2.createServer({
   log: log,
   key: fs.readFileSync('./localhost.key'),
   cert: fs.readFileSync('./localhost.crt')
-}, onRequest);
+}, app);
 
 let port = process.env.PORT || 8080;
 

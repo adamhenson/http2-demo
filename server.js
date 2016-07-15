@@ -31,9 +31,9 @@ function app(req, res) {
 let pusher = new Pusher();
 
 router.get('/', pusher.push, (req, res) => {
-	let title = (res.push)
-		? 'Hello HTTP/1.1'
-		: 'Hello HTTP/2';
+  let title = (res.push)
+    ? 'Hello HTTP/1.1'
+    : 'Hello HTTP/2';
 
   let html = getHTML({
     'title' : title
@@ -47,7 +47,7 @@ router.get('/', pusher.push, (req, res) => {
 // much copied from the documentation. Not doing much for
 // error handling - just a basic example
 router.get('/public/:sub/:file', (req, res) => {
-	req.addListener('end', () => {
+  req.addListener('end', () => {
     fileServer.serve(req, res, (err, result) => {
       if(err) {
         console.error(`Error serving ${req.url} - ${err.message}`);

@@ -2,13 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const StaticFileClient = require('../middleware/StaticFileClient');
 const FILES = require('../constants/files');
 
 class Pusher {
   push(req, res, next) {
     const self = this;
 
+    // if HTTP/2 push method exists
     if(res.push) {
       FILES.forEach((file, index) => {
         let push = res.push(file.path);
@@ -20,9 +20,8 @@ class Pusher {
           next();
         }
       });
-    } else {
-      let staticFileClient = new StaticFileClient(req, res, FILES, next);
-      staticFileClient.createReadStream();
+    } else { // else we're probably on HTTP/1.1
+      next();
     }
   }
 }

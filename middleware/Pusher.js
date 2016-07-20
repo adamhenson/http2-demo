@@ -10,8 +10,21 @@ class Pusher {
 
     // if HTTP/2 push method exists
     if(res.push) {
+      // this doesn't seem to be working consistently yet.
+      // there is a bug I commented on here:
+      // https://github.com/molnarg/node-http2/issues/107#issuecomment-192953121
       FILES.forEach((file, index) => {
         let push = res.push(file.path);
+
+        push.stream.on('error', error => {
+          console.log('Error pushing %s message %s', file.path, error.message);
+          push.stream.removeAllListeners();
+        });
+
+        push.stream.on('end', () => {
+          push.stream.removeAllListeners();
+        })
+
         push.writeHead(200, file.headers);
 
         fs.createReadStream(path.join(__dirname, `../${file.path}`)).pipe(push);

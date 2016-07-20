@@ -32,8 +32,8 @@ let pusher = new Pusher();
 
 router.get('/', pusher.push, (req, res) => {
   let title = (res.push)
-    ? 'Hello HTTP/1.1'
-    : 'Hello HTTP/2';
+    ? 'Hello HTTP/2'
+    : 'Hello HTTP/1.1';
 
   let html = getHTML({
     'title' : title

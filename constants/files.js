@@ -13,6 +13,17 @@ cacheExpire = cacheExpire.toUTCString();
 const FILES = [
   {
     'headers' : {
+      'etag' : `${etag}4`,
+      'content-type' : 'image/x-icon',
+      'cache-control' : `max-age=${maxAge}`,
+      'date' : now,
+      'expires' : cacheExpire,
+      'last-modified' : today
+    },
+    'path' : '/public/images/favicon.ico'
+  },
+  {
+    'headers' : {
       'etag' : `${etag}1`,
       'content-type' : 'text/css',
       'cache-control' : `max-age=${maxAge}`,
@@ -43,17 +54,6 @@ const FILES = [
       'last-modified' : today
     },
     'path' : '/public/images/nyc.jpg'
-  },
-  {
-    'headers' : {
-      'etag' : `${etag}4`,
-      'content-type' : 'image/x-icon',
-      'cache-control' : `max-age=${maxAge}`,
-      'date' : now,
-      'expires' : cacheExpire,
-      'last-modified' : today
-    },
-    'path' : '/public/images/favicon.ico'
   }
 ];
 

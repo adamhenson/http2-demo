@@ -40,7 +40,11 @@ function page(req, res) {
   res.end(html);
 }
 
-let pusher = new Pusher();
+let pushConfig = require('./constants/files');
+
+let pusher = new Pusher({
+  'config' : pushConfig
+});
 
 router.get('/', pusher.push, page);
 router.get('/foo', pusher.push, page);

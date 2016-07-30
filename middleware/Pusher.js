@@ -2,24 +2,50 @@
 
 const fs = require('fs');
 const path = require('path');
-const FILES = require('../constants/files');
 
 class Pusher {
-  push(req, res, next) {
-    // perhaps we can use the url to determine a files object in
-    // some kind of configuration.
-    //console.log(req.url);
-    const self = this;
+  constructor(options) {
+    if(!!options && options.config) {
+      this.config = options.config;
+    }
 
-    // if HTTP/2 push method exists
-    if(res.push) {
-      // this doesn't seem to be working consistently yet.
-      // there is a bug I commented on here:
-      // https://github.com/molnarg/node-http2/issues/107#issuecomment-192953121
-      //
-      // UPDATE: Submitted a pull request (https://github.com/molnarg/node-http2/pull/210)
-      // to fix the issue reproduced with browser cached resources.
-      FILES.forEach((file, index) => {
+    this.push = this.push.bind(this);
+  }
+
+  push(req, res, next) {
+    if(res && res.push && req && req.url && this.config) {
+      this.pushFiles(req, res, next);
+    } else {
+      next();
+    }
+  }
+
+  static getFiles(path, config) {
+    if(!config.groups || !Array.isArray(config.groups)) {
+      return [];
+    }
+    
+    return config.groups.filter((group) => {
+      return path === group.path;
+    });
+  }
+
+  pushFiles(req, res, next) {
+    // there is a bug I commented on here:
+    // https://github.com/molnarg/node-http2/issues/107#issuecomment-192953121
+    //
+    // UPDATE: Submitted a pull request (https://github.com/molnarg/node-http2/pull/210)
+    // to fix the issue reproduced with browser cached resources.
+    let self = this;
+
+    let group = Pusher.getFiles(req.url, self.config);
+
+    if(!group.length || !group[0].files) {
+      next();
+    } else {
+      let files = group[0].files;
+
+      files.forEach((file, index) => {
         let push = res.push(file.path);
 
         push.stream.on('error', error => {
@@ -35,12 +61,10 @@ class Pusher {
 
         fs.createReadStream(path.join(__dirname, `../${file.path}`)).pipe(push);
 
-        if(index === FILES.length - 1) {
+        if(index === files.length - 1) {
           next();
         }
       });
-    } else { // else we're probably on HTTP/1.1
-      next();
     }
   }
 }

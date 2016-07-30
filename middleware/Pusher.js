@@ -13,6 +13,9 @@ class Pusher {
       // this doesn't seem to be working consistently yet.
       // there is a bug I commented on here:
       // https://github.com/molnarg/node-http2/issues/107#issuecomment-192953121
+      //
+      // UPDATE: Submitted a pull request (https://github.com/molnarg/node-http2/pull/210)
+      // to fix the issue reproduced with browser cached resources.
       FILES.forEach((file, index) => {
         let push = res.push(file.path);
 

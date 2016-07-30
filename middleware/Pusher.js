@@ -6,6 +6,9 @@ const FILES = require('../constants/files');
 
 class Pusher {
   push(req, res, next) {
+    // perhaps we can use the url to determine a files object in
+    // some kind of configuration.
+    //console.log(req.url);
     const self = this;
 
     // if HTTP/2 push method exists

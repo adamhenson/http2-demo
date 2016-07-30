@@ -28,9 +28,7 @@ function app(req, res) {
   router(req, res, finalhandler(req, res));
 }
 
-let pusher = new Pusher();
-
-router.get('/', pusher.push, (req, res) => {
+function page(req, res) {
   let title = (res.push)
     ? 'Hello HTTP/2'
     : 'Hello HTTP/1.1';
@@ -40,7 +38,13 @@ router.get('/', pusher.push, (req, res) => {
   });
 
   res.end(html);
-});
+}
+
+let pusher = new Pusher();
+
+router.get('/', pusher.push, page);
+router.get('/foo', pusher.push, page);
+router.get('/foo/:bar', pusher.push, page);
 
 // A temporary substitute for express.static, until Express
 // is more supportive of http2 server push. This was pretty

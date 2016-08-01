@@ -29,6 +29,7 @@
     "bunyan": "^1.8.1",
     "finalhandler": "^0.5.0",
     "http2": "git://github.com/adamhenson/node-http2.git#allow-frames-after-closed-with-rst",
+    "http2-pusher": "git://github.com/adamhenson/http2-pusher.git",
     "node-static": "^0.7.7",
     "router": "^1.1.4"
   },

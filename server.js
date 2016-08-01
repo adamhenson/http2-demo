@@ -8,7 +8,7 @@ const http2 = require('http2');
 const log = require('./lib/util').createLogger('server');
 const path = require('path');
 const url = require('url');
-const Pusher = require('./middleware/Pusher');
+const Pusher = require('http2-pusher');
 const staticFile = require('node-static');
 
 // Cannot use Express until it supports http2 server push,
@@ -43,7 +43,12 @@ function page(req, res) {
 let pushConfig = require('./constants/files');
 
 let pusher = new Pusher({
-  'config' : pushConfig
+  'basePath' : __dirname,
+  'config' : pushConfig,
+  'logger' : {
+    'type' : 'bunyan',
+    'instance' : log
+  }
 });
 
 router.get('/', pusher.push, page);

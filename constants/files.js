@@ -13,7 +13,7 @@ cacheExpire = cacheExpire.toUTCString();
 let config = {
   'groups' : [
     {
-      'path' : '/',
+      'path' : '/foo/*',
       'files' : [
         {
           'headers' : {

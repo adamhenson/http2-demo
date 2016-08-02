@@ -1,14 +1,15 @@
+// In this example any URL beginning with '/foo' will have
+// HTTP/2 pushed resources. See './config/files.js'
 'use strict';
 
 const APP_INFO = require('./package');
 const fs = require('fs');
-const FILES = require('./constants/files');
 const getHTML = require('./templates/MainTemplate');
 const http2 = require('http2');
 const log = require('./lib/util').createLogger('server');
 const path = require('path');
 const url = require('url');
-const Pusher = require('http2-pusher');
+const Http2Pusher = require('http2-pusher');
 const staticFile = require('node-static');
 
 // Cannot use Express until it supports http2 server push,
@@ -40,20 +41,18 @@ function page(req, res) {
   res.end(html);
 }
 
-let pushConfig = require('./constants/files');
-
-let pusher = new Pusher({
+let http2Pusher = new Http2Pusher({
   'basePath' : __dirname,
-  'config' : pushConfig,
+  'config' : require('./config/files'),
   'logger' : {
     'type' : 'bunyan',
     'instance' : log
   }
 });
 
-router.get('/', pusher.push, page);
-router.get('/foo', pusher.push, page);
-router.get('/foo/:bar', pusher.push, page);
+router.get('/', http2Pusher.push, page);
+router.get('/foo', http2Pusher.push, page);
+router.get('/foo/:bar', http2Pusher.push, page);
 
 // A temporary substitute for express.static, until Express
 // is more supportive of http2 server push. This was pretty
